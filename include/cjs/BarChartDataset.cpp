@@ -347,8 +347,6 @@ const std::string BarChartDataset<NumericType>::ToString()
         ss << ",order: " << m_order; 
     if (m_isSkipNull) 
         ss << ",skipNull: true";
-    //end
-    ss << "}]";
     return ss.str();
 }
 

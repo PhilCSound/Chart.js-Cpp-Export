@@ -14,7 +14,7 @@ class BarChart
         inline void MakeGraphVertical() { m_isHorizontal = false; }
 
         inline void SetGrouped(const bool isGrouped) { m_isGrouped = false; }
-        inline void SetLabels(const std::vector<std::string>& labels) { m_labels = label; } 
+        inline void SetLabels(const std::vector<std::string>& labels) { m_labels = labels; } 
         inline void SetSkipNull(const bool skipNull) { m_skipNull = skipNull; }
         //void SetStack()  This is a dataset thing
         //void Order() Dataset order of drawing
@@ -36,11 +36,11 @@ class BarChart
             //Labels
             for(size_t i = 0; i < chart.m_labels.size(); i++)
                 os << "'" << chart.m_labels[i] << "',";
-            os << "],datasets:[{";
+            os << "],datasets:[";
             
             for(auto& dataSet : chart.m_barChartDatasets)
-                os << dataSet.ToString();
-            os << "}});</script></html>";
+                os << "{"<< dataSet.ToString() << "},";
+            os << "]}});</script></html>";
             
             return os;
         }
