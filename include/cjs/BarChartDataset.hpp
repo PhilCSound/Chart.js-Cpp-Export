@@ -83,7 +83,7 @@ class BarChartDataset
         std::vector<Color> m_backGroundColors;
         float m_barPercentage = .9f;
         float m_barThickness = 0.0f;
-        std::vector<Color> m_borderColors = { Color(0, 0, 0, 25) };
+        std::vector<Color> m_borderColors = {};
         float m_borderWidth = 0.00f;
         float m_borderRadius = 0.0f;
         float m_categoryPercent = .8f;
