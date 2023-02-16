@@ -11,7 +11,7 @@ int main()
     BarChartDataset<int> barData1;
     std::vector<int> dataset;
     for (int i = 0; i < 12; i++)
-        dataset.push_back(13-i);
+        dataset.push_back(35-i);
 
     barData.SetData(dataset);
     std::reverse(dataset.begin(), dataset.end());
@@ -29,6 +29,9 @@ int main()
     bc.AddBarChartDataset(barData);
     bc.AddBarChartDataset(barData1);
     bc.SetLabels(xaxis);
+    bc.MakeGraphHorizontal();
+    bc.SetBeginAtZero(false);
+    bc.SetStackBothAxes(true);
 
     std::ofstream outFile;
     outFile.open("test.html");
