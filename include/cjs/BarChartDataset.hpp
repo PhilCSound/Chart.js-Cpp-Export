@@ -34,50 +34,241 @@ class BarChartDataset
 {
     public:
         BarChartDataset() = default;
-        BarChartDataset(const std::string& title);
+        BarChartDataset(const std::string& title) : m_label(title) {};
 
-        const std::vector<Color> GetBackGroundColors() const;
-        const float GetBarPercentage() const;
-        const float GetBarThickness() const;
-        const std::vector<Color> GetBorderColors() const;
-        const float GetBorderWidth() const;
-        const float GetBorderRadius() const;
-        const float GetCategoryPercentage() const;    
-        const Color GetHoverBackgroundColor() const;
-        const Color GetHoverBorderColor() const;
-        const std::vector<NumericType> GetData() const;
-        const NumericType GetDataAt(uint32_t index) const;
-        const bool IsGrouped() const;
-        const float GetHoverBorderWidth() const;
-        const float GetHoverBorderRadius() const;
-        const float GetInflateAmount() const;
-        const float GetMaxBarThickness() const;
-        const float GetMinBarLength() const;
-        const std::string GetLabel() const;
-        const float GetOrder() const;
-        const bool IsSkipNull() const;
+        inline const std::vector<Color> GetBackGroundColors() const
+            { return m_backGroundColors; };
 
-        BarChartDataset& SetBackgroundColors(std::vector<Color>& colors);        
-        BarChartDataset& SetBarPercentage(float barPercentage);
-        BarChartDataset& SetBarThickness(float barThickness);
-        BarChartDataset& SetBorderColors(std::vector<Color>& colors);
-        BarChartDataset& SetBorderWidth(float borderWidth);
-        BarChartDataset& SetBorderRadius(float radius);
-        BarChartDataset& SetCategoryPercentage(float categoryPer) ;
-        BarChartDataset& SetHoverBackgroundColor(Color& hoverBkgColor);
-        BarChartDataset& SetHoverBorderColor(Color& hoverBorderColor) ;
-        BarChartDataset& SetData(std::vector<NumericType>& data);
-        BarChartDataset& SetDataAt(uint32_t index, NumericType data);
-        BarChartDataset& SetGrouped(bool grouped);
-        BarChartDataset& SetHoverBorderWidth(float hoverBorderWidth);
-        BarChartDataset& SetHoverBorderRadius(float hoverBorderRadius);
-        BarChartDataset& SetInflateAmount(float inflateAmt);
-        BarChartDataset& SetMaxBarThickness(float maxBarThickness);
-        BarChartDataset& SetMinBarLength(float minBarLength);
-        BarChartDataset& SetLabel(const std::string& label);
-        BarChartDataset& SetOrder(float order);
-        BarChartDataset& SetSkipNull(bool skipNull);
-        const std::string ToString();
+        inline const float GetBarPercentage() const
+            { return m_barPercentage; };
+        
+        inline const float GetBarThickness() const
+            {return m_barThickness; };
+
+        inline const std::vector<Color> GetBorderColors() const
+            { return m_borderColors; };
+
+        inline const float GetBorderWidth() const
+            { return m_borderWidth; };
+
+        inline const float GetBorderRadius() const
+            { return m_borderRadius; };
+
+        inline const float GetCategoryPercentage() const
+            { return m_categoryPercent; };
+
+        inline const Color GetHoverBackgroundColor() const
+            { return m_hoverBkgColor; };
+
+        inline const Color GetHoverBorderColor() const
+            { return m_hoverBorderColor; };
+
+        inline const std::vector<NumericType> GetData() const
+            { return m_data; };
+
+        inline const NumericType GetDataAt(uint32_t index) const
+            { return m_data[index]; };
+
+        inline const bool IsGrouped() const
+            { return m_isGrouped; };
+
+        inline const float GetHoverBorderWidth() const
+            { return m_hoverBorderWidth; };
+
+        inline const float GetHoverBorderRadius() const
+            { return m_hoverBorderRadius; };
+
+        inline const float GetInflateAmount() const
+            { return m_inflateAmount; };
+
+        inline const float GetMaxBarThickness() const
+            { return m_maxBarThickness; };
+
+        inline const float GetMinBarLength() const
+            { return m_minBarLength; };
+
+        inline const std::string GetLabel() const
+            { return m_label; };
+
+        inline const float GetOrder() const
+            { return m_order; };
+
+        inline const bool IsSkipNull() const
+            { return m_isSkipNull; };
+
+        inline BarChartDataset& SetBackgroundColors(std::vector<Color>& colors)
+            { m_backGroundColors = colors; };
+        
+        inline BarChartDataset& SetBarPercentage(float barPercentage)
+            { m_barPercentage = barPercentage; };
+        
+        inline BarChartDataset& SetBarThickness(float barThickness) 
+        { 
+            m_barThickness = barThickness; 
+            m_userBarThickness = true; 
+        };
+
+        inline BarChartDataset& SetBorderColors(std::vector<Color>& colors)
+            { m_borderColors = colors; };
+            
+        inline BarChartDataset& SetBorderWidth(float borderWidth)
+            { m_borderWidth = borderWidth; };
+
+        inline BarChartDataset& SetBorderRadius(float radius)
+            { m_borderRadius = radius; };
+
+        inline BarChartDataset& SetCategoryPercentage(float categoryPer)
+            { m_categoryPercent = categoryPer; };
+
+        inline BarChartDataset& SetHoverBackgroundColor(Color& hoverBkgColor)
+        {
+            m_hoverBkgColor = hoverBkgColor;
+            m_userHoverBkgColor = true;
+        };
+
+        inline BarChartDataset& SetHoverBorderColor(Color& hoverBorderColor)
+        {
+            m_hoverBorderColor = hoverBorderColor;
+            m_userHoverBorderColor = true;
+        };
+
+        inline BarChartDataset& SetData(std::vector<NumericType>& data)
+            { m_data = data; return *this; };
+        
+        inline BarChartDataset& SetDataAt(uint32_t index, NumericType data)
+            { m_data[index] = data; };
+
+        inline BarChartDataset& SetGrouped(bool grouped)
+            { m_isGrouped = grouped; };
+
+        inline BarChartDataset& SetHoverBorderWidth(float hoverBorderWidth)
+            { m_hoverBorderWidth = hoverBorderWidth; };
+
+        inline BarChartDataset& SetHoverBorderRadius(float hoverBorderRadius)
+            { m_hoverBorderRadius = hoverBorderRadius; };
+
+        inline BarChartDataset& SetInflateAmount(float inflateAmt)
+        {
+            m_inflateAmount = inflateAmt;
+            m_userInflateAmount = true;
+        };
+
+        inline BarChartDataset& SetMaxBarThickness(float maxBarThickness)
+        {
+            m_maxBarThickness = maxBarThickness;
+            m_userMaxBarThickness = true;
+        };
+
+        inline BarChartDataset& SetMinBarLength(float minBarLength)
+        {
+            m_minBarLength = minBarLength;
+            m_userMinBarLength = true;
+        };
+
+        inline BarChartDataset& SetLabel(const std::string& label)
+        {
+            m_label = label;
+            return *this;
+        };
+
+        inline BarChartDataset& SetOrder(float order)
+            { m_order = order; };
+
+        inline BarChartDataset& SetSkipNull(bool skipNull)
+            { m_isSkipNull = skipNull; };
+
+        template <typename NumericType>
+        inline friend std::ostream &operator<<(std::ostream &os, BarChartDataset<NumericType> &ds)
+        {
+            if (ds.m_data.empty())
+                return os;
+
+            /// Labels & Data..
+            os << "label: '" << ds.m_label << "'," << "data: [";
+            for (int i = 0; i < ds.m_data.size(); i++)
+            {
+                os << ds.m_data[i];
+                if ((i + 1) != ds.m_data.size())
+                    os << ",";
+            }
+            os << "]";
+
+            // Background Colors
+            if (!ds.m_backGroundColors.empty())
+            {
+                os << ",backgroundColor: [";
+                for (int i = 0; i < ds.m_backGroundColors.size(); i++)
+                {
+                    os << ds.m_backGroundColors[i].ToHexColorCode();
+                    if ((i + 1) != ds.m_backGroundColors.size())
+                        os << ",";
+                }
+                os << "]";
+            }
+
+            /// Bar Thickness & Bar Percentage/Category Percentage
+            if (ds.m_userBarThickness)
+                os << ",barThickness: " << ds.m_barThickness;
+            else
+            {
+                if (ds.m_barPercentage != .9f)
+                    os << ",barPercentage: " << ds.m_barPercentage;
+                if (ds.m_categoryPercent != .8f)
+                    os << ",categoryPercentage" << ds.m_categoryPercent;
+            }
+
+            /// Border Colors
+            if (!ds.m_borderColors.empty())
+            {
+                os << ",borderColor: [";
+                for (int i = 0; i < ds.m_borderColors.size(); i++)
+                {
+                    os << ds.m_borderColors[i].ToHexColorCode();
+                    if ((i + 1) != ds.m_borderColors.size())
+                        os << ",";
+                }
+                os << "]";
+            }
+
+            /// Border Width and Border Radius
+            if (ds.m_borderWidth != 0)
+                os << ",borderWidth: " << ds.m_borderWidth;
+            if (ds.m_borderRadius != 0)
+                os << ",borderRadius: " << ds.m_borderRadius;
+
+            /// Grouped
+            if (!ds.m_isGrouped)
+                os << ",grouped: false";
+
+            /// Hover Background Color and HoverBorderColor
+            if (ds.m_userHoverBkgColor)
+                os << ",hoverBackgroundColor: " << ds.m_hoverBkgColor.ToHexColorCode();
+            if (ds.m_userHoverBorderColor)
+                os << ",hoverBorderColor: " << ds.m_hoverBorderColor.ToHexColorCode();
+
+            /// HoverBorderWidth and HoverBorderRadius
+            if (ds.m_hoverBorderWidth != 1.0f)
+                os << ",hoverBorderWidth: " << ds.m_hoverBorderWidth;
+            if (ds.m_hoverBorderRadius != 0)
+                os << ",hoverBorderRadius: " << ds.m_hoverBorderRadius;
+
+            /// Inflate Amount
+            if (ds.m_userInflateAmount)
+                os << ",inflateAmount: " << ds.m_inflateAmount;
+
+            // MaxBarThickness and MinBarLength
+            if (ds.m_userMaxBarThickness)
+                os << ",maxBarThickness: " << ds.m_maxBarThickness;
+            if (ds.m_userMinBarLength)
+                os << ",minBarLength: " << ds.m_minBarLength;
+
+            /// Order and SkipNull
+            if (ds.m_order)
+                os << ",order: " << ds.m_order;
+            if (ds.m_isSkipNull)
+                os << ",skipNull: true";
+            return os;
+        }
 
     private:
         std::vector<Color> m_backGroundColors;
@@ -106,6 +297,3 @@ class BarChartDataset
         bool m_userMaxBarThickness = false;
         bool m_userMinBarLength = false;
 };
-
-#pragma once
-#include "BarChartDataset.cpp"
