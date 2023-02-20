@@ -11,7 +11,7 @@ set(SOURCE_FILES
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
 
 install(TARGETS ${PROJECT_NAME}
         RUNTIME DESTINATION .)
