@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <cstdint>
-#include <sstream>
 #include <iostream>
 #include "Color.hpp"
 /**
