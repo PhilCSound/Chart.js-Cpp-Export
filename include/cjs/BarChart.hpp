@@ -10,7 +10,7 @@ public:
     inline void AddBarChartDataset(const BarChartDataset<NumericType>& dataset)
     {
         m_barChartDatasets.push_back(dataset);
-c1    }
+    }
 
     inline void MakeGraphHorizontal()
     {
