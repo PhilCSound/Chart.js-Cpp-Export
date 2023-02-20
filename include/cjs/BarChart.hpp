@@ -44,7 +44,7 @@ class BarChart
             os << "],datasets:[";
         
             for(auto& dataSet : chart.m_barChartDatasets)
-                os << "{"<< dataSet.ToString() << "},";
+                os << "{" << dataSet << "},";
             os << "]},";
 
             //Options
