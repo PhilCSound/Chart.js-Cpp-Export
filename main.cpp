@@ -41,7 +41,7 @@ int main()
     
     bc.AddBarChartDataset(barData);
     bc.AddBarChartDataset(barData1);
-
+    bc.DisableAnimations();
     bc.SetLabels(xaxis);
     //bc.MakeGraphHorizontal();
     bc.SetBeginAtZero(true);
