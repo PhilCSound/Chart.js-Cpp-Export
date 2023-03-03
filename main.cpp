@@ -47,15 +47,9 @@ int main()
     bc.SetBeginAtZero(true);
     bc.SetStackBothAxes(false);
 
-    std::ofstream outFile;
-    outFile.open("test.html");
-    if (outFile.is_open())
-        outFile << bc;
-    else
+    if (!bc.ToFile("test.html"))
         return -5;
-    outFile.close();
     char url[100] = "test.html";
-
     ShellExecute(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
     return 0;
 }
