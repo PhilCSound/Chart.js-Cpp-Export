@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "HTMLElement"
+#include "DocumentElement.hpp"
 
 namespace cjs
 {
@@ -10,11 +10,11 @@ class Document
 {
     public:
         Document();
-        void AddElement(HTMLElement element);
+        void AddElement(DocumentElement element);
         void ToHTML(std::string fileName, std::string filePath);
 
     private:
-        std::vector<HTMLElement> m_elements;
+        std::vector<DocumentElement> m_elements;
 
 };
 
