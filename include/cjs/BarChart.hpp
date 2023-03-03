@@ -1,8 +1,10 @@
 #pragma once
 #include "BarChartDataset.hpp"
+#include "DocumentElement.hpp"
+#include <fstream>
 
 template <typename NumericType>
-class BarChart
+class BarChart : public DocumentElement
 {
 public:
     /// @brief Default Constructor
@@ -45,7 +47,9 @@ public:
         m_beginAxisAtZero = isBeginAtZero;
     };
 
-    //TODO?
+    /// @brief 
+    /// @param isGrouped
+    /// @todo FIGURE THIS OUT 
     inline void SetGrouped(const bool isGrouped)
     {
         m_isGrouped = false;
@@ -89,6 +93,30 @@ public:
         m_stackYAxis = stackYAxis;
     }
 
+    /// @brief Writes the BarChart to a file. 
+    /// @param filename The name of the file you wish for it be called, MUST INCLUDE EXTENSION. EX: "name.html"
+    /// @param path PATH SHOULD INCLUDE A "/" character at the end EX: "charts/somefolder/"  Default: Empty string.
+    /// @param offline If true, chart.js will be parsed into the HTML file. Default: False.
+    /// This increases filesize but can be viewed with no internet connection
+    /// @return True, for success. False, for failure.
+    inline bool ToFile(const std::string& filename, const std::string& path = "", bool offline = false)
+    {
+        std::ofstream outFile;
+        outFile.open(path + filename);
+        if (!outFile.is_open())
+            return false;
+        //Beginning of file
+        outFile << "<!DOCTYPE html><html><div><canvas id=\"chart\"></canvas></div>"
+           << "<script src=\"https://cdn.jsdelivr.net/npm/chart.js@4.1.1/dist/chart.umd.min.js\"></script>"
+           << "<script>const ctx = document.getElementById('chart');new Chart(ctx, {";
+        //Parse content
+        ParseElement(outFile);
+        //End File
+        outFile << "});</script></html>";
+        outFile.close();
+        return true;
+    }
+
     //=================================================================~~~~~~~~~~~~~~~~~~~~~~~~
     //              Operator overloads  !!!!!!!!
     //=========================================================================================
@@ -101,48 +129,55 @@ public:
         if (chart.m_barChartDatasets.empty() || chart.m_labels.empty())
             return os;
 
-        /// TODO: This part can be moved to a HTMLDocument class.
+        chart.ParseElement(os);
+        return os;
+    }
+
+private:
+    /*===========================================================================================
+                        Private Member functions
+    ============================================================================================*/
+
+    /// @brief This function is used internally by ToFile and << overloads to ensure DocumentElements can parse data. 
+    /// @param os Outstream. 
+    inline void ParseElement(std::ostream &os) override
+    {
+       /// TODO: This part can be moved to a HTMLDocument class.
         os << "<!DOCTYPE html><html><div><canvas id=\"chart\"></canvas></div>"
            << "<script src=\"https://cdn.jsdelivr.net/npm/chart.js@4.1.1/dist/chart.umd.min.js\"></script>"
-           << "<script>const ctx = document.getElementById('chart');new Chart(ctx, {"
-           << "type: 'bar', data: { labels: [";
-
+           << "<script>const ctx = document.getElementById('chart');new Chart(ctx, {";
+           
+        os << "type: 'bar', data: { labels: [";
         // Labels
-        for (size_t i = 0; i < chart.m_labels.size(); i++)
-            os << "'" << chart.m_labels[i] << "',";
+        for (size_t i = 0; i < m_labels.size(); i++)
+            os << "'" << m_labels[i] << "',";
 
         // Datasets
         os << "],datasets:[";
 
-        for (auto &dataSet : chart.m_barChartDatasets)
+        for (auto &dataSet : m_barChartDatasets)
             os << "{" << dataSet << "},";
         os << "]},";
 
         // Options
         os << " options: {";
-        if (!chart.m_allowAnimations)
+        if (!m_allowAnimations)
             os << "animation: false,";
-        if (chart.m_isHorizontal)
+        if (m_isHorizontal)
             os << "indexAxis: 'y',";
         os << "scales: { x: {"; // XAxis
-        if (chart.m_stackXAxis)
+        if (m_stackXAxis)
             os << "stacked: true,";
-        if (!chart.m_beginAxisAtZero && chart.m_isHorizontal)
+        if (m_beginAxisAtZero && m_isHorizontal)
             os << "beginAtZero: false";
         os << "}, y: {"; // YAxis
-        if (chart.m_stackYAxis)
+        if (m_stackYAxis)
             os << "stacked: true,";
-        if (!chart.m_beginAxisAtZero && !chart.m_isHorizontal)
+        if (m_beginAxisAtZero && m_isHorizontal)
             os << "beginAtZero: false";
         os << "}}},";
-
-        // TODO: Set Grouped?
-        os << "});</script></html>";
-
-        return os;
     }
 
-private:
     /// @brief Collection of BarChartDatasets.
     std::vector<BarChartDataset<NumericType>> m_barChartDatasets;
     
