@@ -34,232 +34,234 @@ class BarChartDataset
 public:
     BarChartDataset() = default;
     BarChartDataset(const std::string& title) : m_label(title){};
+    BarChartDataset(const std::vector<NumericType>& data) : m_data(data){};
+    BarChartDataset(const std::string& title, const std::vector<NumericType>& data) : m_label(title), m_data(data) {};
 
     inline const std::vector<Color> GetBackGroundColors() const
     {
         return m_backGroundColors;
-    };
+    }
 
     inline const float GetBarPercentage() const
     {
         return m_barPercentage;
-    };
+    }
 
     inline const float GetBarThickness() const
     {
         return m_barThickness;
-    };
+    }
 
     inline const std::vector<Color> GetBorderColors() const
     {
         return m_borderColors;
-    };
+    }
 
     inline const float GetBorderWidth() const
     {
         return m_borderWidth;
-    };
+    }
 
     inline const float GetBorderRadius() const
     {
         return m_borderRadius;
-    };
+    }
 
     inline const float GetCategoryPercentage() const
     {
         return m_categoryPercent;
-    };
+    }
 
     inline const Color GetHoverBackgroundColor() const
     {
         return m_hoverBkgColor;
-    };
+    }
 
     inline const Color GetHoverBorderColor() const
     {
         return m_hoverBorderColor;
-    };
+    }
 
     inline const std::vector<NumericType> GetData() const
     {
         return m_data;
-    };
+    }
 
     inline const NumericType GetDataAt(uint32_t index) const
     {
         return m_data[index];
-    };
+    }
 
     inline const bool IsGrouped() const
     {
         return m_isGrouped;
-    };
+    }
 
     inline const float GetHoverBorderWidth() const
     {
         return m_hoverBorderWidth;
-    };
+    }
 
     inline const float GetHoverBorderRadius() const
     {
         return m_hoverBorderRadius;
-    };
+    }
 
     inline const float GetInflateAmount() const
     {
         return m_inflateAmount;
-    };
+    }
 
     inline const float GetMaxBarThickness() const
     {
         return m_maxBarThickness;
-    };
+    }
 
     inline const float GetMinBarLength() const
     {
         return m_minBarLength;
-    };
+    }
 
     inline const std::string GetLabel() const
     {
         return m_label;
-    };
+    }
 
     inline const float GetOrder() const
     {
         return m_order;
-    };
+    }
 
     inline const bool IsSkipNull() const
     {
         return m_isSkipNull;
-    };
+    }
 
     inline BarChartDataset& SetBackgroundColors(std::vector<Color>& colors)
     {
         m_backGroundColors = colors;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetBarPercentage(float barPercentage)
     {
         m_barPercentage = barPercentage;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetBarThickness(float barThickness)
     {
         m_barThickness = barThickness;
         m_userBarThickness = true;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetBorderColors(std::vector<Color>& colors)
     {
         m_borderColors = colors;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetBorderWidth(float borderWidth)
     {
         m_borderWidth = borderWidth;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetBorderRadius(float radius)
     {
         m_borderRadius = radius;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetCategoryPercentage(float categoryPer)
     {
         m_categoryPercent = categoryPer;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetHoverBackgroundColor(Color& hoverBkgColor)
     {
         m_hoverBkgColor = hoverBkgColor;
         m_userHoverBkgColor = true;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetHoverBorderColor(Color& hoverBorderColor)
     {
         m_hoverBorderColor = hoverBorderColor;
         m_userHoverBorderColor = true;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetData(std::vector<NumericType>& data)
     {
         m_data = data;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetDataAt(uint32_t index, NumericType data)
     {
         m_data[index] = data;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetGrouped(bool grouped)
     {
         m_isGrouped = grouped;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetHoverBorderWidth(float hoverBorderWidth)
     {
         m_hoverBorderWidth = hoverBorderWidth;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetHoverBorderRadius(float hoverBorderRadius)
     {
         m_hoverBorderRadius = hoverBorderRadius;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetInflateAmount(float inflateAmt)
     {
         m_inflateAmount = inflateAmt;
         m_userInflateAmount = true;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetMaxBarThickness(float maxBarThickness)
     {
         m_maxBarThickness = maxBarThickness;
         m_userMaxBarThickness = true;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetMinBarLength(float minBarLength)
     {
         m_minBarLength = minBarLength;
         m_userMinBarLength = true;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetLabel(const std::string& label)
     {
         m_label = label;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetOrder(float order)
     {
         m_order = order;
         return *this;
-    };
+    }
 
     inline BarChartDataset& SetSkipNull(bool skipNull)
     {
         m_isSkipNull = skipNull;
         return *this;
-    };
+    }
 
     template <typename NumericType>
     inline friend std::ostream& operator<<(std::ostream& os, BarChartDataset<NumericType>& ds)
