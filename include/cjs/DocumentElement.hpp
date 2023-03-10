@@ -3,5 +3,6 @@
 
 class DocumentElement
 {
+    friend class Document;
     virtual void ParseElement(std::ostream &os) = 0;
 };
