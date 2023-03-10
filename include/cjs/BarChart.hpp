@@ -2,13 +2,26 @@
 #include "BarChartDataset.hpp"
 #include "DocumentElement.hpp"
 #include <fstream>
+#include <memory>
 
 template <typename NumericType>
 class BarChart : public DocumentElement
 {
 public:
+
+    /// @return Returns a shared pointer of a Barchart. This is the prefered way of creating a chart.
+    static std::shared_ptr<BarChart<NumericType>> Create()
+    {
+        return std::make_shared<BarChart<NumericType>>();
+    };
+
     /// @brief Default Constructor
+    /// @attention Use BarChart::Create() if you wish to use the Document class.
     BarChart() = default;
+
+    template <typename NumericType>
+    BarChart(const std::vector<std::string>& labels = {})
+        : m_labels(labels) { };
 
     ///@brief Inserts a COPY of a BarchartDataset into the bar chart.
     inline void AddBarChartDataset(const BarChartDataset<NumericType>& dataset)
@@ -142,11 +155,6 @@ private:
     /// @param os Outstream. 
     inline void ParseElement(std::ostream &os) override
     {
-       /// TODO: This part can be moved to a HTMLDocument class.
-        os << "<!DOCTYPE html><html><div><canvas id=\"chart\"></canvas></div>"
-           << "<script src=\"https://cdn.jsdelivr.net/npm/chart.js@4.1.1/dist/chart.umd.min.js\"></script>"
-           << "<script>const ctx = document.getElementById('chart');new Chart(ctx, {";
-           
         os << "type: 'bar', data: { labels: [";
         // Labels
         for (size_t i = 0; i < m_labels.size(); i++)
@@ -177,6 +185,10 @@ private:
             os << "beginAtZero: false";
         os << "}}},";
     }
+
+    /*===========================================================================================
+                        Private Member Variables
+    ============================================================================================*/
 
     /// @brief Collection of BarChartDatasets.
     std::vector<BarChartDataset<NumericType>> m_barChartDatasets;
