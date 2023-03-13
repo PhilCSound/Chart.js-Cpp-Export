@@ -60,9 +60,9 @@ public:
         m_beginAxisAtZero = isBeginAtZero;
     };
 
-    /// @brief 
-    /// @param isGrouped
-    /// @todo FIGURE THIS OUT 
+    /// @brief True by default. If set to false, the chart will draw all bars on the same spot, effectively
+    /// drawing bars on top of bars and is not a desirable trait generally. If you wish to stackbar ontop of each other use SetStackAxis.
+    /// @param isGrouped Boolean you wish to set the value to. 
     inline void SetGrouped(const bool isGrouped)
     {
         m_isGrouped = false;
@@ -173,6 +173,8 @@ private:
             os << "animation: false,";
         if (m_isHorizontal)
             os << "indexAxis: 'y',";
+        if (!m_isGrouped)
+            os << "grouped: false,";
         os << "scales: { x: {"; // XAxis
         if (m_stackXAxis)
             os << "stacked: true,";
@@ -205,8 +207,9 @@ private:
     /// @brief False by default, if true the bar chart is rendered horizontally instead of vertically.
     bool m_isHorizontal = false;
 
-    /// @todo Figure this out...
-    bool m_isGrouped = false;
+    /// @brief True by default. If set to false, the chart will draw all bars on the same spot, effectively
+    /// drawing bars on top of bars and is not a desirable trait generally. If you wish to stackbar ontop of each other use SetStackAxis.
+    bool m_isGrouped = true;
 
     /// @brief Mainly here to try and keep functionality, but if true will skip nullable values.
     bool m_skipNull = false;
