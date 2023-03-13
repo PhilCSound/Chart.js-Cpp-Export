@@ -57,8 +57,6 @@ int main()
     //Set labels and made graph horizontal
     bc->SetLabels(xaxis);
     bc->MakeGraphHorizontal();
-    //Begin barchart at zero
-    bc->SetBeginAtZero(true);
 
     //Add the bar chart to the document.
     doc.AddElement(bc);
