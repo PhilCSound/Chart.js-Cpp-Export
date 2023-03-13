@@ -1,0 +1,32 @@
+/**
+ * All other charts except for Barchart... 
+ *
+ * TODO in Barchart Dataset / missed things
+ * Base
+ * Border SKipped
+ * Clip
+ * point style
+ * Stack
+ * XAxisID
+ * YAxisID
+ * !!!!!!CHANGE hoverBorderColor and equivalents to std::vector
+ *
+
+
+ * ==========Below is MISC NOTES FOR @PhilCSound
+ * Commons in all but for Radar:
+ * Clip
+ * BackgroundColors
+ * BorderColors
+ * BorderWidth
+ * hoverBackgroundColor
+ * hoverBorderColor
+ * hoverBorderWidth
+ *
+ *
+ * RADAR CHART IS UNIQUE
+ * Bar/Bubble/Line/Pie/Polar/Radar are all unique charts
+ * Scatter is a variation of Line charts 
+ * and Doughnut is a variation of Bubble.
+ *
+ */
